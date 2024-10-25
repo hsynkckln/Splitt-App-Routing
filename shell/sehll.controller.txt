@@ -1,0 +1,156 @@
+sap.ui.define(
+  ["sap/ui/core/mvc/Controller", "sap/ui/model/Filter",	'sap/ui/core/Fragment',"sap/m/MessageToast","sap/m/Button"
+
+],
+    function (Controller , Filter,Fragment,MessageToast ) {
+      "use strict";
+
+    var oModel,data = [],aaa=[],asd=[],editData;
+      
+      return Controller.extend("BNetSapUI5.Application.Main.views.shell", {
+      onInit: function () {
+        oModel = new sap.ui.model.json.JSONModel();
+        this.getView().setModel(oModel);
+        var mData = {"bilgi": [{"key":"1","text":"Kritik"},{"key":"2","text":"normal"}]};
+        this.getView().addEventDelegate({
+          onBeforeShow :function(){
+            oModel.setProperty("/personelBilgisi", {});
+            oModel.setProperty("/Doktor", {doktorID:"",doktorAdı:"",doktorSoyadı:"",
+            doktorTC:"",doktorBrans:"",doktorKullanıcı:"",doktorMail:"",doktorTel:""});
+        }
+      })
+        oModel.setData(mData)
+        oModel.setProperty("/DoktorBilgileri",[])
+        
+    },
+
+    // // sayacı arttırdığım yer
+    // increase : function(){
+    //     var i =Number( oModel.getProperty("/InputContent"))
+    //     var total=0;
+    //       total = total + i;
+    //       total++;
+    //       oModel.setProperty("/InputContent",total )
+    // },
+    // // sayacı azalattığım yer
+    // reduce : function(){
+    //     var i =Number(oModel.oData.InputContent)
+    //     var total=0;
+    //       total = total + i;
+    //       total--;
+    //       oModel.setProperty("/InputContent",total )
+    // },
+
+    //Dialog kısmını açtığım yer
+    handleTableSelectDialogPress: function (oEvent) {
+        var oButton = oEvent.getSource(),
+          oView = this.getView();
+        if (!this._pDialog) {
+          this._pDialog = Fragment.load({
+            id: oView.getId(),
+            name: "BNetSapUI5.Application.Main.views.Prod.view.Dialog",
+            
+            controller: this,
+          }).then(function(oDialog){
+            oView.addDependent(oDialog);
+            return oDialog;
+          })
+        }
+        this._pDialog.then(function(oDialog){
+          oDialog.open();
+        }.bind(this))
+        const editId = this.getView().byId("editId")
+        const saveId = this.getView().byId("saveId")
+        if(saveId.setVisible(true) ){
+          editId.setVisible(false)
+        }
+    },
+    //Dialog kısmındaki kapatma yeri
+    closes : function () {
+        if (!this._pDialog) {
+          this._pDialog = Fragment.load({
+            name: "BNetSapUI5.Application.Main.views.Prod.view.Dialog",
+          });
+        } 
+        this._pDialog.then(function(_oDialog) {
+          _oDialog.close();
+        });
+    },
+
+    // Dialog kısmında kayıt yaptığım yer burada yapıyorum
+    save :  function (e) {
+      if (!this._pDialog) {
+        this._pDialog = Fragment.load({
+          name: "BNetSapUI5.Application.Main.views.Prod.view.Dialog",
+        });
+      } 
+      
+
+      const combo=  asd[asd.length-1]
+      var denemes =  oModel.getProperty("/personelBilgisi")
+      console.log(denemes)
+      if(denemes && denemes.name && denemes.lastNames && denemes.iliness && denemes.hastadrm){
+        aaa.push({...denemes,
+          hastadrm:combo}) 
+        oModel.setProperty("/DoktorBilgileri",aaa)
+        oModel.setProperty("/personelBilgisi",[]);
+        const veriable = oModel.getProperty("/DoktorBilgileri")
+        asd[asd.length-1] = undefined;
+          if(veriable[veriable.length-1].hastadrm !== undefined){
+            oModel.setProperty("/DoktorBilgileri",aaa)
+            console.log('first')
+          }else if(veriable[veriable.length-1].hastadrm === undefined){
+            oModel.setProperty("/DoktorBilgileri",[])
+            console.log('hata')
+          }
+          this._pDialog.then(function(_oDialog) {
+            _oDialog.close();
+          });
+        }else{
+          var msg = 'bütün bilgileri giriniz ';
+          MessageToast.show(msg);
+        }
+    },
+    //ilk sayfadaki doktor bilgilerini sıfırladığım yer
+        sifirla : function (){
+          oModel.setProperty("/Doktor", {doktorID:"",doktorAdı:"",doktorSoyadı:"",
+          doktorTC:"",doktorBrans:"",doktorKullanıcı:"",doktorMail:"",doktorTel:""});
+    },
+
+        onDeletion: function(oEvent) {
+          var sBindingPath = oEvent.oSource.getParent().getBindingContext().getPath();
+          var selectedIndex = sBindingPath.split("/")[2];
+          this._oTable = this.byId("idList")
+          var oTableData = this._oTable.getModel().getData();
+          oTableData.DoktorBilgileri.splice(selectedIndex, 1);
+          this._oTable.getModel().setData(oTableData);
+      },
+    //Düzenleme işlemini yaptığım yer
+    edidation : function(oEvent){
+      var item = oModel.getProperty(oEvent.oSource.oPropagatedProperties.oBindingContexts.undefined.sPath) 
+      data.push(item)
+      this._pDialog.then(function(oDialog){
+        oDialog.open();
+      })
+      oModel.setProperty("/personelBilgisi",item)
+      const editId = this.getView().byId("editId")
+      const saveId = this.getView().byId("saveId")
+      
+      if(editId.setVisible(true) ){
+        saveId.setVisible(false)
+      }
+      
+    },
+    edit : function(){
+      const aadd =  oModel.getProperty("/personelBilgisi")
+      console.log(aadd)
+      oModel.setProperty("/personelBilgisi",aadd);
+      oModel.setProperty("/personelBilgisi",[]);
+      this._pDialog.then(function(_oDialog) {
+        _oDialog.close();
+      });
+    }
+
+    });
+  }
+);

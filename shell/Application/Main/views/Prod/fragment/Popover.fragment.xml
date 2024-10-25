@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:main="sap.ui.webc.main"
+	xmlns:u="sap.ui.unified">
+	<Popover
+		id="myPopover"
+		contentWidth="450px"
+		contentHeight="500px"
+		placement="Bottom"
+		ariaLabelledBy="master-title"
+		title="Sorgu Listesi"
+	>
+		<NavContainer
+			id="navCon">
+			<Table id="idProductsTable"
+				inset="false"
+				items="{/basket}">
+
+				<columns>
+					<Column
+						width="12em">
+						<Text text="Ana Tablo" />
+					</Column>
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true">
+						<Text text="Ana Tab. Alanı" />
+					</Column>
+					<Column
+						minScreenWidth="Desktop"
+						demandPopin="true"
+						hAlign="End">
+						<Text text="ilişkili Tablo" />
+					</Column>
+					
+					<Column
+						hAlign="End">
+						<Text text="ilş. Tab. Aln." />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<ObjectIdentifier
+								
+								text="{iliski}" />
+							<Text
+								text="{alanIliski}" />
+								<Text
+								text="{iliski2}" />
+								<Text
+								text="{alanIliski2}" />
+							
+							
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+
+		</NavContainer>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,50 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:layout="sap.ui.layout"
+	xmlns:l="sap.ui.layout"
+	xmlns:tnt="sap.tnt"
+	controllerName="BNetSapUI5.Application.Main.views.Prod.controller.Detail">
+	<tnt:ToolHeader>
+
+		<ToolbarSpacer />
+		<Button icon="sap-icon://cart" text="Sepetim" class="sapUiTinyMarginEnd" press="basketOpen"></Button>
+
+
+	</tnt:ToolHeader>
+	<Page>
+		<VBox id="detailsBlock">
+			<HBox class="sapUiLargeMarginBegin sapUiLargeMarginTop">
+				<Text text="{/obj}" class="aciklama2"></Text>
+				<Text text="/" class="sapUiSmallMarginBegin  cizgi"></Text>
+				<Text text="{/obj2}" class="aciklama3 sapUiTinyMarginBegin "></Text>
+			</HBox>
+			<HBox class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+				<ComboBox
+					id="comboBox1"
+					items="{/Check}"
+					change="comboLoad1">
+					<core:Item text="{alanAd}" />
+				</ComboBox>
+
+				<ComboBox
+					class="sapUiLargeMarginBegin"
+					id="comboBox2"
+					items="{/Check2}"
+					change="comboLoad2">
+					<core:Item text="{alanAd}" />
+				</ComboBox>
+			</HBox>
+			<HBox class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+
+			</HBox>
+			<HBox>
+				<Button text="Sorguya Ekle" press="push"
+					class="sapUiLargeMarginBegin sapUiSmallMarginTop"></Button>
+			</HBox>
+		</VBox>
+	</Page>
+</mvc:View>

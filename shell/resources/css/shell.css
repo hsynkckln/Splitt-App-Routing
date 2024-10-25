@@ -1,0 +1,77 @@
+.aciklama2{
+    font-size: 20px !important;
+}
+.aciklama3{
+    font-size: 16px !important;
+    margin-top: 5px !important;
+}
+.cizgi{
+    font-size: 20px !important;
+}
+.hbColor{
+    background-color:#dcdde1 !important;
+    height: 2.5rem !important;
+    position: relative !important;
+    right: 3rem !important;
+}
+.inputs{
+    width: 20rem !important;
+    position: relative !important;
+    bottom: 0.5rem !important;
+}
+.input{
+    width: 20rem !important;
+}
+.vertical{
+    margin-left: 10rem !important;
+}
+.vertical2{
+    margin-left: 12rem !important;
+}
+.vbox{
+    padding: 0.5rem !important;
+}
+.saat{
+    position: relative !important;
+    left: 2rem !important;
+}
+.danisman{
+    position: relative !important;
+    left: 2rem !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+}
+.label{
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    top: 0.5rem !important;
+   
+}
+.label2{
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    top: 0.5rem !important;
+    margin-left: 4rem !important;
+}
+.label3{
+    font-size: 1rem !important;
+    font-weight: bold !important;
+}
+.simple{
+    position: relative !important;
+    right: 3rem !important;
+}
+.page{
+    background-color: white !important;
+}
+.page2{
+    height: 3rem !important;
+}
+.labell{
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    bottom: 0.2rem !important;
+}

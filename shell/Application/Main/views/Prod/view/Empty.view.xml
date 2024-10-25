@@ -1,0 +1,9 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page title="Detay Sayfası">
+        <content>
+            <Text text="Lütfen bir tablo seçiniz." />
+        </content>
+    </Page>
+</mvc:View>
